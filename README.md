@@ -1,3 +1,18 @@
+# it is using tailwiddcss for styling
+all styles added to input.css will be pushed to the theme
+
+run ./watch.sh to have changes uploaded automatically
+run pnpm watch:tailwind to have tailwind process input.css into /tpl/stylesheets.css
+
+load the auth page and refresh after doing changes
+
+
+
+todo:
+- maybe automate the tailwind build process into the watch.sh script
+- add all watch script to trigger from scripts in package.json
+
+
 # Theme helper
 
 This repository has tools to help with FusionAuth theme management. It offers syncing to and from your local system. It also has a tool to compare between two themes, which is useful when upgrading FusionAuth.
