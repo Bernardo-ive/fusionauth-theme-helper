@@ -51,7 +51,7 @@
     [/@helpers.header]
 
     [@helpers.main title=theme.message("login")]
-      [#-- During a linking work flow, optionally indicate to the user which IdP is being linked. --]
+      [#-- During a linking work flow, optionally indicate to the user which IdP is being linked. --] 
       [#if devicePendingIdPLink?? || pendingIdPLink??]
         <p class="mt-0">
         [#if devicePendingIdPLink?? && pendingIdPLink??]

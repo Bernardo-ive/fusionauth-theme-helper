@@ -1,0 +1,297 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+
+--main-text-color: #0e0566;
+  --main-accent-color: #0e0566;
+  --hover-accent-color: #ea580c;
+  --link-color: #4338ca;
+  --input-background: #fbfbfb;
+  --body-background: #0e0566;
+  --tooltip-background: #e2e2e2;
+  --error-color: #ff0000;
+  --error-background: #ffe8e8;
+  --border-color: #dddddd;
+  --logo-url: url(https://iveone-test.ivegroup.com.au/favicon/android-chrome-512x512.png);
+  --font-stack: Buenos-Aires, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+
+  /* base brand */
+  --blue: #0e0566;
+  --white: #ffffff;
+
+  /* secondary (light/mid/dark are single swatches per guide) */
+  --sand: #fff0c8;
+  --rose: #ffd2d2;
+  --blush: #ffd9f4;
+  --lavender: #ded7ff;
+  --sky: #b1eaff;
+  --aqua: #a5ebe1;
+  --sage: #ddf1bb;
+
+  --yellow: #ffc530;
+  --red: #ff1f4f;
+  --pink: #ff4696;
+  --purple: #b25ee6;
+  --azure: #009bd7;
+  --teal: #08a4a4;
+  --green: #64aa3e;
+
+  --orange: #ff510b;
+  --cherry: #91112b;
+  --berry: #9f0067;
+  --violet: #591a83;
+  --cobalt: #004fa4;
+  --ocean: #006a7e;
+  --forest: #19643c;
+
+  --pale-gray: oklch(0.92 0.004 286.32);
+
+  /* RGB for alpha utilities */
+  --blue-rgb: 14 5 102;
+  --white-rgb: 255 255 255;
+  --sky-rgb: 177 234 255;
+  --purple-rgb: 178 94 230;
+  --pink-rgb: 255 70 150;
+  --azure-rgb: 0 155 215;
+  --teal-rgb: 8 164 164;
+  --green-rgb: 100 170 62;
+  --orange-rgb: 255 81 11;
+
+  /* semantic aliases*/
+  --color-brand: var(--blue);
+  --color-brand-contrast: var(--white);
+  --color-info: var(--cobalt);
+  --color-success: var(--green);
+  --color-warning: var(--yellow);
+  --color-danger: var(--red);
+
+
+  
+  --background: oklch(1 0 0);  
+  --foreground: var(--blue); /* used as text color */
+  --card: oklch(1 0 0);
+  --card-foreground: #0e0566;
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.141 0.005 285.823);
+  --primary: var(--background);
+  --primary-foreground: var(--foreground);
+  --secondary: #B1EAFF;
+  --secondary-foreground: var(--blue);
+  --muted: oklch(0.967 0.001 286.375);
+  --muted-foreground: oklch(0.552 0.016 285.938);
+  --accent: oklch(0.967 0.001 286.375);
+  --accent-foreground: oklch(0.21 0.006 285.885);
+  --destructive: var(--color-danger);
+  --destructive-foreground: var(--color-danger);
+  --border: var(--pale-gray);
+  --input: var(--pale-gray);   
+  --ring: oklch(0.871 0.006 286.286);
+  --chart-1: var(--red);
+  --chart-2: var(--orange);
+  --chart-3: var(--yellow);
+  --chart-4: var(--green);
+  --chart-5: var(--blue);
+  --radius: 0.625rem;
+  --sidebar: var(--white); 
+  --sidebar-foreground: var(--blue);
+  --sidebar-primary: oklch(0.646 0.222 41.116);
+  --sidebar-primary-foreground: oklch(0.985 10 110);
+  --sidebar-accent: var(--brand-color, oklch(0.871 0.006 286.286));
+  --sidebar-accent-foreground: var(--white);
+  --sidebar-border: oklch(0.92 0.004 286.32);
+  --sidebar-ring: oklch(0.871 0.006 286.286);
+  
+  /* rich gradients (yellow→green spectrum) */
+  --grad-yellow: linear-gradient(135deg, #ffc530 0%, #ff510b 50%, #ff4696 100%);
+  --grad-pink: linear-gradient(135deg, #ff4696 0%, #b25ee6 100%);
+  --grad-purple: linear-gradient(135deg, #b25ee6 0%, #009bd7 100%);
+  --grad-azure: linear-gradient(135deg, #009bd7 0%, #08a4a4 100%);
+  --grad-teal: linear-gradient(135deg, var(--teal) 0%, var(--yellow) 100%);
+  --grad-green: linear-gradient(135deg, #64aa3e 0%, #a5ebe1 100%);
+  --grad-sky: linear-gradient(135deg, #b1eaff 0%, #0e0566 100%);  
+
+  /* linear pairs used in headings etc. */
+  --grad-teal-green: linear-gradient(90deg, #08a4a4 0%, #64aa3e 100%);
+  --grad-pink-purple: linear-gradient(90deg, #ff4696 0%, #b25ee6 100%);
+  --grad-blue-sky: linear-gradient(90deg, #0e0566 0%, #b1eaff 100%);
+  --grad-lavender-sky: linear-gradient(90deg, #ded7ff 0%, #b1eaff 100%);  
+
+  --grad-sidebar: linear-gradient(180deg, var(--white) 0%, var(--white) 90%, var(--white) 100%);
+  /* --grad-sidebar-vignette: radial-gradient(
+    ellipse at 50% 100%,
+    rgb(var(--white-rgb) / 0.90) 0%,
+    rgb(var(--white-rgb) / 0.60) 35%,
+    rgb(var(--white-rgb) / 0.20) 60%,
+    rgb(var(--blue-rgb) / 0.10) 85%,
+    rgb(var(--blue-rgb) / 0.18) 100%
+    ),
+    var(--grad-sidebar); */
+
+}
+
+/* Typical Buttons and Links */
+a {
+  color: var(--link-color);
+  text-decoration: underline;
+}
+a:hover {
+  color: var(--link-color);
+}
+a:visited {
+  color: var(--link-color);
+}
+.blue-text {
+  color: var(--link-color) !important;
+}
+
+input, textarea, select, button {
+  font-family: var(--font-stack);
+  background-color: var(--input-background);
+  color: var(--main-text-color);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.alert{
+    border-radius: var(--radius);
+    background-color: var(--input-background);
+    padding: 8px 16px;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+input:focus, textarea:focus, select:focus, button:focus {
+  outline: none;
+  border-color: var(--color-brand);
+  box-shadow: 0 0 0 3px rgba(var(--blue-rgb), 0.3);
+}
+
+body {
+  /* background-color: var(--body-background); */
+  color: var(--main-text-color);
+  font-family: var(--font-stack);
+  margin: 0;
+  padding: 0;   
+}
+.page-body:before {
+  content: '';
+  display: block;
+  width: 80%;
+  max-width: 20rem;
+  height: 200px;
+  margin: 0 auto 3rem auto;
+  background-image: var(--logo-url);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+main{
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Typical typography */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--main-text-color) !important;
+  line-height: normal;
+}
+p {
+  margin: 1.5em 0;
+  line-height: 1.375;
+}
+
+button {
+    cursor: pointer;
+    background-color: var(--color-brand);
+    color: var(--color-brand-contrast);
+    border: none;
+    transition: background-color 0.3s ease;
+    border-radius: 50px;
+}
+
+.panel {
+    background-color: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;    
+    
+    form, fieldset {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+}
+}
+
+ .coming-bg {
+    background-image: linear-gradient(
+      120deg,
+      rgba(var(--pink-rgb) / 0.35),
+      rgba(var(--purple-rgb) / 0.35),
+      rgba(var(--azure-rgb) / 0.35),
+      rgba(var(--teal-rgb) / 0.35),
+      rgba(var(--green-rgb) / 0.35)
+    );
+    background-size: 300% 300%;
+    animation: coming-bg-shift 18s ease-in-out infinite;
+  }
+
+  .app-header{
+    display: none;
+  }
+
+  /* Errors */
+body .alert {
+  color: var(--main-text-color);
+}
+body .alert a {
+  height: auto;
+  width: auto;
+}
+body .alert.error a i.fa {
+  color: var(--error-color);
+}
+body .alert.error {
+  border: 1px solid var(--error-color);
+  margin: 0 0 2rem 0;
+  background: var(--error-background);
+  box-shadow: none;
+  border-radius: .25rem;
+}
+body .alert .dismiss-button i {
+  margin: 0;
+}
+.error {
+  font-size: .75rem;
+  margin: .5em 0;
+}
+label.error {
+  color: var(--error-color);
+  font-size: inherit;
+}
+form .form-row span.error {
+  color: var(--error-color);
+}
+input.error {
+  background: var(--error-background);
+  border-color: var(--error-color) !important;
+}
+
+  @keyframes coming-bg-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}

@@ -1,7 +1,12 @@
 {
+  "scripts": {
+    "watch:tailwind": "tailwindcss -i ./input.css -o ./tpl/stylesheet.css --watch",
+    "watch:theme": "fusionauth theme:watch THEME-ID -k API_KEY -h FUSIONAUTH_URL",
+    "download": "fusionauth theme:download THEME-ID -k API_KEY -h FUSIONAUTH_URL"
+  },
   "dependencies": {
-    "@fusionauth/cli": "^1.3.0",
+    "@fusionauth/cli": "^1.6.0",
     "dotenv": "^16.0.3",
-    "tailwind": "^4.0.0"
+    "tailwindcss": "^3.4.19"
   }
 }
