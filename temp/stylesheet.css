@@ -1,9 +1,9 @@
 :root {
   --main-text-color: #0e0566;
   --main-accent-color: #0e0566;
-  --hover-accent-color: #ea580c;
+  --hover-accent-color: #2e068c;
   --link-color: #4338ca;
-  --input-background: #fbfbfb;
+  --input-background: #f0eaec;
   --body-background: #0e0566;
   --tooltip-background: #e2e2e2;
   --error-color: #ff0000;
@@ -11,6 +11,7 @@
   --border-color: #dddddd;
   --logo-url: url(https://iveone-test.ivegroup.com.au/favicon/android-chrome-512x512.png);
   --font-stack: Buenos-Aires, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --radius: .125rem;
 }
 body {
   font-family: var(--font-stack);
@@ -24,9 +25,9 @@ body {
 .page-body:before {
   content: '';
   display: block;
-  width: 80%;
+  width: 100%;
   max-width: 20rem;
-  height: 3.5rem;
+  height: 150px;
   margin: 0 auto 3rem auto;
   background-image: var(--logo-url);
   background-size: contain;
@@ -38,7 +39,7 @@ body {
 /* Changes for Powered by FusionAuth div */
 body > main main.page-body {
   min-height: calc(100vh - 3rem); /* to make the Powered by FusionAuth div position at the bottom of the page if the page is shorter than the viewport */
-  padding-top: 5rem;
+  padding-top: 2.5rem;
 }
 body > main {
   padding-bottom: 2.5rem; /* giving Powered by FusionAuth more space */
@@ -48,16 +49,15 @@ body > main {
 }
 /* End Powered by FusionAuth */
 
-
 /* Uncomment following to hide help bar at top */
-/*
+
 body > main {
   padding-top: 0;
 }
 body > main header.app-header {
   display: none;
 }
-*/
+
 /* end help bar */
 
 
@@ -92,8 +92,8 @@ a:visited {
 }
 .button {
   font-size: 1.125rem !important;
-  border-radius: .5rem;
-  padding: 1rem !important;
+  border-radius: 50px;
+  padding: 0.8rem !important;
   line-height: normal !important;
   letter-spacing: normal !important;
 }
@@ -118,7 +118,7 @@ main.page-body .row:last-of-type a {
   text-decoration: none;
   padding: .5em .75em;
   border: 1px solid var(--main-accent-color);
-  border-radius: .25em;
+  border-radius: var(--radius);
   font-size: .75rem;
   margin-top: .7rem;
   display: inline-block;
@@ -134,8 +134,8 @@ main.page-body .row:last-of-type a {
 
 /* Typical Form panel and inputs */
 .panel {
-  box-shadow: 0 0 1.5625rem 1.25rem rgba(234, 234, 234, 0.8);
-  border-radius: .625rem;
+  /* box-shadow: 0 0 1.5625rem 1.25rem rgba(234, 234, 234, 0.8); */
+  border-radius: var(--radius);
   border: none;
   padding: 2.25rem 2.75rem;
 }
@@ -193,10 +193,15 @@ label.select select
  {
   background: var(--input-background);
   border: 1px solid var(--border-color) !important;
-  border-radius: .25rem !important;
+  border-radius: 8px !important;
   box-shadow: none;
   font-size: 1rem;
-  padding: 1em .625em;
+  padding: .625em;
+  background-color:oklab(0.92 0.00112401 -0.00383883 / 0.3);
+  border-bottom-color:oklch(0.92 0.004 286.32);
+  border-radius:8px;
+  border-color:oklch(0.92 0.004 286.32);
+  border-style:solid;
 }
 input:focus,
 input:active,
@@ -761,7 +766,7 @@ hr,
 }
 @media only screen and (min-width: 768px) {
   #acct-2fa-index .page-body > .row.center:last-of-type {
-    width: calc(83.33333333% - 30px);
+    /* width: calc(83.33333333% - 30px); */
   }
 }
 @media only screen and (min-width: 992px) {
@@ -1005,11 +1010,11 @@ hr,
   #acct-index .page-body > .row:first-of-type > .col-sm-12,
   #acct-index .page-body > .row:first-of-type > .col-md-10,
   #acct-index .page-body > .row:first-of-type > .col-lg-8 {
-    flex-basis: 54.125rem;
-    max-width: 54.125rem;
+    /* flex-basis: 54.125rem; */
+    /* max-width: 54.125rem; */
   }
   #acct-index .page-body > .row.center:last-of-type {
-    width: 54.125rem;
+    width: 1024px;
   }
   #acct-index .panel:before {
     width: 6.25rem;
