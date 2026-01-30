@@ -101,7 +101,8 @@
       });
       Prime.Document.query('[data-tooltip]').each(function(e) {
         new Prime.Widgets.Tooltip(e).withClassName('tooltip').initialize();
-      }); document.querySelectorAll('.date-picker').forEach(datePicker => {
+      }); 
+      document.querySelectorAll('.date-picker').forEach(datePicker => {
       datePicker.onfocus = () => datePicker.type = 'date';
       datePicker.onblur = () => {
         if (datePicker.value === '') {
@@ -123,7 +124,7 @@
   [/#macro]
   [#macro body]
 
-  <body class="app-sidebar-closed coming-bg">
+  <body class="app-sidebar-closed ">
     <main>
       [#nested/]
     </main>
@@ -198,18 +199,18 @@
   [/#if]
   [/#macro]
   [#macro main title="Login" rowClass="row center-xs" colClass="col-xs col-sm-8 col-md-6 col-lg-5 col-xl-4"]
-  <main class="page-body container border-red-500">
+  <section class="page-body container">
     [@printErrorAlerts rowClass colClass/]
     [@printInfoAlerts rowClass colClass/]
     <div class="${rowClass}">
       <div class="${colClass}">
         <div class="panel min-w-full text-center" data-in-progress>        
           [#if title?has_content]
-          <h2 class="text-4xl mb-4 text-center">
-            ${title}
+          <h2 class="text-4xl font-bold mb-4 mt-4 text-center">
+         IVE One ${title}
           </h2>
           [/#if]
-          <main class="form-wrapper flex flex-col space-y-4">
+          <main class="form-wrapper flex flex-col space-y-4 w-full justify-center items-center">
             [#nested/]
           </main>
         </div>
@@ -220,10 +221,10 @@
         [@localSelector/]
       </div>
     </div>  --]
-  </main>
+  </section>
   [/#macro]
   [#macro accountMain rowClass="row center-xs" colClass="col-xs col-sm-8 col-md-6 col-lg-5 col-xl-4" actionURL="" actionText="Go back" actionDirection="back"]
-  <main class="page-body container">
+  <section class="page-body container">
     [@printErrorAlerts rowClass colClass/]
     [@printInfoAlerts rowClass colClass/]
     <div class="${rowClass}">
@@ -232,7 +233,7 @@
       </div>
     </div>
     [@accountFooter rowClass "col-xs-6 col-sm-6 col-md-5 col-lg-4" actionURL actionText actionDirection/]
-  </main>
+  </section>
   [/#macro]
   [#macro localSelector]
   <label class="select">
@@ -1248,7 +1249,7 @@
   </span>
   [/#if]
   [/#macro]
-  [#macro button text icon="arrow-right" color="blue" disabled=false name="" value=""]
+  [#macro button text icon="arrow-right" color="blue" disabled=false name=""value=""]
   <button class="${color} button${disabled?then(' disabled', '')}"
     [#if disabled]
     disabled="disabled"
@@ -1258,7 +1259,10 @@
     [/#if]
     [#if value !="" ]
     value="${value}"
-    [/#if]><i class="fa fa-${icon}"></i>
+    [/#if]>
+    [#if icon !="" ]
+    <i class="fa fa-${icon}"></i>
+    [/#if]
     ${text}
   </button>
   [/#macro]

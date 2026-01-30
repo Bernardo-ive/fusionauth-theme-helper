@@ -87,10 +87,14 @@
             <i class="fa fa-info-circle" data-tooltip="${theme.message('{tooltip}remember-device')}"></i>[#t/]
           [/@helpers.input]
 
-          <div class="form-row">
+          <div class="flex flex-col gap-4 mt-4">
             [#if showPasswordField]
-              [@helpers.button icon="key" text=theme.message("submit")/]
+              <div >
+              [@helpers.button icon="" text=theme.message("submit")/]
+              </div>
+              <div class="mt-2">
               [@helpers.link url="${request.contextPath}/password/forgot"]${theme.message("forgot-your-password")}[/@helpers.link]
+              </div>
             [#else]
               [@helpers.button icon="arrow-right" text=theme.message("next")/]
             [/#if]

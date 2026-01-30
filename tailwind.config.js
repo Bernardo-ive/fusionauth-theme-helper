@@ -4,6 +4,18 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [require('daisyui')],
+  daisyui: {
+    themes: [
+        'corporate',
+        {
+          business: {
+              // ...require("daisyui/src/colors/themes")["[data-theme=business]"],
+              'primary': '#c891f2'
+          }
+        }
+    ],
+    darkTheme: 'business'
+}
 }
 

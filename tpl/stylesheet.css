@@ -656,6 +656,10 @@ video {
   display: none;
 }
 
+.w-full {
+  width: 100%;
+}
+
 .min-w-full {
   min-width: 100%;
 }
@@ -676,15 +680,22 @@ video {
   flex-wrap: wrap;
 }
 
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.gap-4 {
+  gap: 1rem;
+}
+
 .space-y-4 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
   margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(1rem * var(--tw-space-y-reverse));
-}
-
-.border-red-500 {
-  --tw-border-opacity: 1;
-  border-color: rgb(239 68 68 / var(--tw-border-opacity, 1));
 }
 
 .p-3 {
@@ -728,6 +739,61 @@ video {
   line-height: 2.5rem;
 }
 
+.font-bold {
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: Buenos Aires;
+
+  src: url(https://www.ivehub.com.au/public/fonts/BuenosAires-Regular.otf);
+
+  font-weight: 400;
+
+  font-style: normal;
+
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Buenos Aires;
+
+  src: url(https://www.ivehub.com.au/public/fonts/BuenosAires-Light.otf);
+
+  font-weight: 300;
+
+  font-style: normal;
+
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Buenos Aires;
+
+  src: url(https://www.ivehub.com.au/public/fonts/BuenosAires-Bold.otf);
+
+  font-weight: 700;
+
+  font-style: normal;
+
+  font-display: swap;
+}
+
+/* @font-face {
+  font-family: BuenosAires-Light;
+  src: url(https://www.ivehub.com.au/assets/BuenosAires-Light-CK7IpwFG.woff2);
+  font-weight: 400;
+  font-display: swap;
+}
+
+
+@font-face {
+  font-family: BuenosAires-Bold;
+  src: url(https://www.ivehub.com.au/assets/BuenosAires-Bold-iBl9cXYa.woff2);
+  font-weight: 700;
+  font-display: swap;
+} */
+
 :root {
   --main-text-color: #0e0566;
   --main-accent-color: #0e0566;
@@ -740,7 +806,7 @@ video {
   --error-background: #ffe8e8;
   --border-color: #dddddd;
   --logo-url: url(https://iveone-test.ivegroup.com.au/favicon/android-chrome-512x512.png);
-  --font-stack: Buenos-Aires, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-stack: Buenos Aires, Roboto, Helvetica, Arial, sans-serif;
   /* base brand */
   --blue: #0e0566;
   --white: #ffffff;
@@ -793,7 +859,7 @@ video {
   --popover-foreground: oklch(0.141 0.005 285.823);
   --primary: var(--background);
   --primary-foreground: var(--foreground);
-  --secondary: #B1EAFF;
+  --secondary: #b1eaff;
   --secondary-foreground: var(--blue);
   --muted: oklch(0.967 0.001 286.375);
   --muted-foreground: oklch(0.552 0.016 285.938);
@@ -831,7 +897,12 @@ video {
   --grad-pink-purple: linear-gradient(90deg, #ff4696 0%, #b25ee6 100%);
   --grad-blue-sky: linear-gradient(90deg, #0e0566 0%, #b1eaff 100%);
   --grad-lavender-sky: linear-gradient(90deg, #ded7ff 0%, #b1eaff 100%);
-  --grad-sidebar: linear-gradient(180deg, var(--white) 0%, var(--white) 90%, var(--white) 100%);
+  --grad-sidebar: linear-gradient(
+    180deg,
+    var(--white) 0%,
+    var(--white) 90%,
+    var(--white) 100%
+  );
   /* --grad-sidebar-vignette: radial-gradient(
     ellipse at 50% 100%,
     rgb(var(--white-rgb) / 0.90) 0%,
@@ -862,7 +933,10 @@ a:visited {
   color: var(--link-color) !important;
 }
 
-input, textarea, select, button {
+input,
+textarea,
+select,
+button {
   font-family: var(--font-stack);
   background-color: var(--input-background);
   color: var(--main-text-color);
@@ -871,10 +945,12 @@ input, textarea, select, button {
   padding: 0.5rem 1rem;
   font-size: 1rem;
   line-height: 1.5;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
-.alert{
+/* .alert {
   border-radius: var(--radius);
   background-color: var(--input-background);
   padding: 8px 16px;
@@ -882,9 +958,12 @@ input, textarea, select, button {
   display: flex;
   align-items: center;
   gap: 1rem;
-}
+} */
 
-input:focus, textarea:focus, select:focus, button:focus {
+input:focus,
+textarea:focus,
+select:focus,
+button:focus {
   outline: none;
   border-color: var(--color-brand);
   box-shadow: 0 0 0 3px rgba(var(--blue-rgb), 0.3);
@@ -896,9 +975,23 @@ body {
   font-family: var(--font-stack);
   margin: 0;
   padding: 0;
+  background-color: hsla(196, 100%, 42%, 1);
+  background-image:
+    radial-gradient(at 100% 0%, hsla(196, 100%, 32%, 1) 0px, transparent 50%),
+    radial-gradient(at 95% 75%, hsla(200, 85%, 84%, 1) 0px, transparent 50%),
+    radial-gradient(at 0% 0%, hsla(179, 100%, 30%, 1) 0px, transparent 50%);
+  /* Ensure the gradient fills the full viewport, even on short pages */
+  min-height: 100vh;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-attachment: fixed;
 }
 
-.page-body:before {
+form .form-row span.error {
+  color: var(--error-color);
+}
+
+/* .page-body:before {
   content: '';
   display: block;
   width: 80%;
@@ -909,17 +1002,22 @@ body {
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
-}
+} */
 
-main{
+main {
   padding: 2rem;
-  max-width: 800px;
+  max-width: 500px;
   margin: 0 auto;
 }
 
 /* Typical typography */
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   color: var(--main-text-color) !important;
   line-height: normal;
 }
@@ -936,6 +1034,9 @@ button {
   border: none;
   transition: background-color 0.3s ease;
   border-radius: 50px;
+  /* i {
+    display: none;
+  } */
 }
 
 .panel {
@@ -945,32 +1046,153 @@ button {
   padding: 2rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 2rem;
+  gap: 1rem;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  form, fieldset {
+  justify-content: center;
+  form,
+  fieldset {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    max-width: 400px;
+    width: 100%;
+    .input-addon-group {
+      display: flex;
+      gap: 0;
+      width: 100%;
+      input {
+        width: 100%;
+      }
+      .icon {
+        display: none;
+      }
+    }
   }
 }
 
+/*  style a checkbox input */
+
+/* input[type="checkbox"] {
+  width: auto;
+  accent-color: var(--color-brand);
+  width: 1.25rem;
+  height: 1.25rem;
+} */
+
 .coming-bg {
   background-image: linear-gradient(
-      120deg,
-      rgba(var(--pink-rgb) / 0.35),
-      rgba(var(--purple-rgb) / 0.35),
-      rgba(var(--azure-rgb) / 0.35),
-      rgba(var(--teal-rgb) / 0.35),
-      rgba(var(--green-rgb) / 0.35)
-    );
+    120deg,
+    rgba(var(--pink-rgb) / 0.35),
+    rgba(var(--purple-rgb) / 0.35),
+    rgba(var(--azure-rgb) / 0.35),
+    rgba(var(--teal-rgb) / 0.35),
+    rgba(var(--green-rgb) / 0.35)
+  );
   background-size: 300% 300%;
   animation: coming-bg-shift 18s ease-in-out infinite;
 }
 
-.app-header{
+.app-header {
   display: none;
 }
+
+/* ALERT */
+
+.alert {
+  align-items: center;
+  background: #fff;
+  border-radius: 2px;
+  box-shadow:
+    0 1px 3px 0 rgba(0, 0, 0, 0.2),
+    0 1px 1px 0 rgba(0, 0, 0, 0.14),
+    0 2px 1px 0 rgba(0, 0, 0, 0.12);
+  color: #4c4c4c;
+  display: flex;
+  font-size: 14px;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  opacity: 1;
+  padding: 10px 20px 10px 20px;
+  position: relative;
+  transition: opacity 0.3s ease-in-out;
+  width: 100%;
+}
+
+.alert.closed {
+  opacity: 0;
+}
+
+.alert.info {
+  border-left: 5px solid #3998db;
+}
+
+.alert.info i {
+  color: #3998db;
+}
+
+.alert.error {
+  border-left: 5px solid #ee3e54;
+}
+
+.alert.error i {
+  color: #ee3e54;
+}
+
+.alert.success {
+  border-left: 5px solid #0f8b72;
+}
+
+.alert.success i {
+  color: #0f8b72;
+}
+
+.alert.warning {
+  border-left: 5px solid #ff9c3d;
+}
+
+.alert.warning i {
+  color: #ff9c3d;
+}
+
+.alert a {
+  display: inline-block;
+  flex: 0 0 auto;
+  font-size: 16px;
+  font-weight: bold;
+  height: 20px;
+  text-decoration: none;
+  width: 20px;
+}
+
+.alert a i.fa {
+  color: #999;
+}
+
+.alert i {
+  display: inline-block;
+  flex: 0 0 auto;
+  font-size: 20px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.alert p a {
+  display: inline;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.alert > p,
+.alert > ul,
+.alert > div,
+.alert > span {
+  flex: 0 1 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* ALERT */
 
 /* Errors */
 
@@ -992,7 +1214,7 @@ body .alert.error {
   margin: 0 0 2rem 0;
   background: var(--error-background);
   box-shadow: none;
-  border-radius: .25rem;
+  border-radius: 0.25rem;
 }
 
 body .alert .dismiss-button i {
@@ -1000,8 +1222,8 @@ body .alert .dismiss-button i {
 }
 
 .error {
-  font-size: .75rem;
-  margin: .5em 0;
+  font-size: 0.75rem;
+  margin: 0.5em 0;
 }
 
 label.error {
@@ -1011,6 +1233,11 @@ label.error {
 
 form .form-row span.error {
   color: var(--error-color);
+  display: block;
+  margin-top: 0.25rem;
+  width: 100%;
+  text-align: left;
+  margin-left: 0.5rem;
 }
 
 input.error {
@@ -1029,5 +1256,72 @@ input.error {
 
   100% {
     background-position: 0% 50%;
+  }
+}
+
+/* Tooltip */
+
+.tooltip {
+  background: var(--tooltip-background);
+  font-size: 0.75rem;
+  color: var(--main-text-color);
+  text-align: left;
+  z-index: 1000;
+  position: absolute;
+  padding: 0.5rem 1rem;
+  max-width: 200px;
+  border-radius: var(--radius);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border);
+}
+
+.tooltip:after {
+  border-top-color: var(--tooltip-background);
+}
+
+.tooltip.inverted:before {
+  border-bottom-color: var(--tooltip-background);
+}
+
+.fa-info-circle {
+  color: var(--main-accent-color) !important;
+  cursor: pointer;
+}
+
+/* End Tooltip */
+
+/* Progress Bar */
+
+.progress-bar {
+  border: 1px solid var(--border);
+  height: 30px;
+  width: 100%;
+}
+
+.progress-bar div {
+  background: var(--color-brand);
+  height: 30px;
+  -moz-animation-name: progressBar;
+  -moz-animation-iteration-count: 1;
+  -moz-animation-timing-function: ease-in;
+  -moz-animation-duration: 10s;
+  -webkit-animation-name: progressBar;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-timing-function: ease-in;
+  -webkit-animation-duration: 10s;
+  animation-name: progressBar;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-duration: 10s;
+  width: 0;
+}
+
+@keyframes progressBar {
+  0% {
+    width: 0;
+  }
+
+  100% {
+    width: 100%;
   }
 }

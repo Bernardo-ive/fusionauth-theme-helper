@@ -11,6 +11,9 @@ importers:
       '@fusionauth/cli':
         specifier: ^1.6.0
         version: 1.6.0
+      daisyui:
+        specifier: ^5.5.14
+        version: 5.5.14
       dotenv:
         specifier: ^16.0.3
         version: 16.6.1
@@ -130,6 +133,9 @@ packages:
     resolution: {integrity: sha512-/Tb/JcjK111nNScGob5MNtsntNM1aCNUDipB/TkwZFhyDrrE47SOx/18wF2bbjgc3ZzCSKW1T5nt5EbFoAz/Vg==}
     engines: {node: '>=4'}
     hasBin: true
+
+  daisyui@5.5.14:
+    resolution: {integrity: sha512-L47rvw7I7hK68TA97VB8Ee0woHew+/ohR6Lx6Ah/krfISOqcG4My7poNpX5Mo5/ytMxiR40fEaz6njzDi7cuSg==}
 
   deepmerge@4.3.1:
     resolution: {integrity: sha512-3sUqbMEc77XqpdNO7FRyRog+eW3ph+GYCbj+rK+uYyRMuwsVy0rMiVtPn+QJlKFvWP/1PYpapqYn0Me2knFn+A==}
@@ -645,6 +651,8 @@ snapshots:
   commander@4.1.1: {}
 
   cssesc@3.0.0: {}
+
+  daisyui@5.5.14: {}
 
   deepmerge@4.3.1: {}
 
