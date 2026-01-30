@@ -846,72 +846,48 @@ video {
   /* semantic aliases*/
   --color-brand: var(--blue);
   --color-brand-contrast: var(--white);
-  --color-info: var(--cobalt);
-  --color-success: var(--green);
-  --color-warning: var(--yellow);
-  --color-danger: var(--red);
-  --background: oklch(1 0 0);
-  --foreground: var(--blue);
-  /* used as text color */
-  --card: oklch(1 0 0);
-  --card-foreground: #0e0566;
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.141 0.005 285.823);
-  --primary: var(--background);
-  --primary-foreground: var(--foreground);
-  --secondary: #b1eaff;
-  --secondary-foreground: var(--blue);
-  --muted: oklch(0.967 0.001 286.375);
-  --muted-foreground: oklch(0.552 0.016 285.938);
-  --accent: oklch(0.967 0.001 286.375);
-  --accent-foreground: oklch(0.21 0.006 285.885);
-  --destructive: var(--color-danger);
-  --destructive-foreground: var(--color-danger);
-  --border: var(--pale-gray);
-  --input: var(--pale-gray);
-  --ring: oklch(0.871 0.006 286.286);
-  --chart-1: var(--red);
-  --chart-2: var(--orange);
-  --chart-3: var(--yellow);
-  --chart-4: var(--green);
-  --chart-5: var(--blue);
-  --radius: 0.625rem;
-  --sidebar: var(--white);
-  --sidebar-foreground: var(--blue);
-  --sidebar-primary: oklch(0.646 0.222 41.116);
-  --sidebar-primary-foreground: oklch(0.985 10 110);
-  --sidebar-accent: var(--brand-color, oklch(0.871 0.006 286.286));
-  --sidebar-accent-foreground: var(--white);
-  --sidebar-border: oklch(0.92 0.004 286.32);
-  --sidebar-ring: oklch(0.871 0.006 286.286);
-  /* rich gradients (yellow→green spectrum) */
-  --grad-yellow: linear-gradient(135deg, #ffc530 0%, #ff510b 50%, #ff4696 100%);
-  --grad-pink: linear-gradient(135deg, #ff4696 0%, #b25ee6 100%);
-  --grad-purple: linear-gradient(135deg, #b25ee6 0%, #009bd7 100%);
-  --grad-azure: linear-gradient(135deg, #009bd7 0%, #08a4a4 100%);
-  --grad-teal: linear-gradient(135deg, var(--teal) 0%, var(--yellow) 100%);
-  --grad-green: linear-gradient(135deg, #64aa3e 0%, #a5ebe1 100%);
-  --grad-sky: linear-gradient(135deg, #b1eaff 0%, #0e0566 100%);
-  /* linear pairs used in headings etc. */
-  --grad-teal-green: linear-gradient(90deg, #08a4a4 0%, #64aa3e 100%);
-  --grad-pink-purple: linear-gradient(90deg, #ff4696 0%, #b25ee6 100%);
-  --grad-blue-sky: linear-gradient(90deg, #0e0566 0%, #b1eaff 100%);
-  --grad-lavender-sky: linear-gradient(90deg, #ded7ff 0%, #b1eaff 100%);
-  --grad-sidebar: linear-gradient(
-    180deg,
-    var(--white) 0%,
-    var(--white) 90%,
-    var(--white) 100%
-  );
-  /* --grad-sidebar-vignette: radial-gradient(
-    ellipse at 50% 100%,
-    rgb(var(--white-rgb) / 0.90) 0%,
-    rgb(var(--white-rgb) / 0.60) 35%,
-    rgb(var(--white-rgb) / 0.20) 60%,
-    rgb(var(--blue-rgb) / 0.10) 85%,
-    rgb(var(--blue-rgb) / 0.18) 100%
-    ),
-    var(--grad-sidebar); */
+}
+
+body {
+  /* background-color: var(--body-background); */
+  color: var(--main-text-color);
+  font-family: var(--font-stack);
+  font-weight: 300;
+  margin: 0;
+  padding: 0;
+  background-color: hsla(196, 100%, 42%, 1);
+  background-image:
+    radial-gradient(at 100% 0%, hsla(196, 100%, 32%, 1) 0px, transparent 50%),
+    radial-gradient(at 95% 75%, hsla(200, 85%, 84%, 1) 0px, transparent 50%),
+    radial-gradient(at 0% 0%, hsla(179, 100%, 30%, 1) 0px, transparent 50%);
+  /* Ensure the gradient fills the full viewport, even on short pages */
+  min-height: 100vh;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-attachment: fixed;
+}
+
+form .form-row span.error {
+  color: var(--error-color);
+}
+
+/* .page-body:before {
+  content: '';
+  display: block;
+  width: 80%;
+  max-width: 20rem;
+  height: 200px;
+  margin: 0 auto 3rem auto;
+  background-image: var(--logo-url);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+} */
+
+main {
+  padding: 2rem;
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 /* Typical Buttons and Links */
@@ -950,16 +926,6 @@ button {
     box-shadow 0.3s ease;
 }
 
-/* .alert {
-  border-radius: var(--radius);
-  background-color: var(--input-background);
-  padding: 8px 16px;
-  border: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-} */
-
 input:focus,
 textarea:focus,
 select:focus,
@@ -967,47 +933,6 @@ button:focus {
   outline: none;
   border-color: var(--color-brand);
   box-shadow: 0 0 0 3px rgba(var(--blue-rgb), 0.3);
-}
-
-body {
-  /* background-color: var(--body-background); */
-  color: var(--main-text-color);
-  font-family: var(--font-stack);
-  margin: 0;
-  padding: 0;
-  background-color: hsla(196, 100%, 42%, 1);
-  background-image:
-    radial-gradient(at 100% 0%, hsla(196, 100%, 32%, 1) 0px, transparent 50%),
-    radial-gradient(at 95% 75%, hsla(200, 85%, 84%, 1) 0px, transparent 50%),
-    radial-gradient(at 0% 0%, hsla(179, 100%, 30%, 1) 0px, transparent 50%);
-  /* Ensure the gradient fills the full viewport, even on short pages */
-  min-height: 100vh;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  background-attachment: fixed;
-}
-
-form .form-row span.error {
-  color: var(--error-color);
-}
-
-/* .page-body:before {
-  content: '';
-  display: block;
-  width: 80%;
-  max-width: 20rem;
-  height: 200px;
-  margin: 0 auto 3rem auto;
-  background-image: var(--logo-url);
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
-} */
-
-main {
-  padding: 2rem;
-  max-width: 500px;
-  margin: 0 auto;
 }
 
 /* Typical typography */

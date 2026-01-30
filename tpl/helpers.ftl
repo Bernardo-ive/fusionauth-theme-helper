@@ -1249,7 +1249,7 @@
   </span>
   [/#if]
   [/#macro]
-  [#macro button text icon="arrow-right" color="blue" disabled=false name=""value=""]
+  [#macro button text icon="" color="blue" disabled=false name="" value=""]
   <button class="${color} button${disabled?then(' disabled', '')}"
     [#if disabled]
     disabled="disabled"
@@ -1260,7 +1260,7 @@
     [#if value !="" ]
     value="${value}"
     [/#if]>
-    [#if icon !="" ]
+    [#if icon?has_content && icon?trim != ""]
     <i class="fa fa-${icon}"></i>
     [/#if]
     ${text}
