@@ -34,6 +34,12 @@ More about FusionAuth themes: https://fusionauth.io/docs/customize/look-and-feel
 * update `.env.sample` with your API key, FusionAuth hostname, and theme id and copy it to `.env`
 * you can modify the TMP_DIR to be wherever you'd like it to be, the default is `tmp` in the current directory.
 
+If you want to run `fusionauth ...` commands directly (without `-k/-h`), load the env vars into your shell first:
+
+```sh
+. ./env.sh
+```
+
 The provided API key must have `/api/theme` permissions for the `GET` and `PATCH` methods.
 
 ## Usage for storing a theme in version control

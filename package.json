@@ -1,8 +1,10 @@
 {
   "scripts": {
     "watch:tailwind": "tailwindcss -i ./input.css -o ./tpl/stylesheet.css --watch",
-    "watch:theme": "fusionauth theme:watch THEME-ID -k API_KEY -h FUSIONAUTH_URL",
-    "download": "fusionauth theme:download THEME-ID -k API_KEY -h FUSIONAUTH_URL"
+    "watch:theme": "bash ./watch.sh",
+    "download": "bash ./download.sh",
+    "upload": "bash ./upload.sh",
+    "download:emails": "bash ./download-emails.sh"
   },
   "dependencies": {
     "@fusionauth/cli": "^1.6.0",
