@@ -33,7 +33,7 @@
 
   </html>
   [/#macro]
-  [#macro head title="Login | FusionAuth" author="FusionAuth" description="User Management Redefined. A Single Sign-On solution for your entire enterprise."]
+  [#macro head title="Login | IVE One" author="IVE One" description="User Management Redefined. A Single Sign-On solution for your entire enterprise."]
 
   <head>
     <title>
@@ -53,7 +53,7 @@
     You can check if this is working using this site https://realfavicongenerator.net/
     Questions about icon names and sizes? https://realfavicongenerator.net/faq#.XrBnPJNKg3g --]
     [#-- Apple & iOS --]
-    <link rel="apple-touch-icon" sizes="57x57" href="/images/apple-icon-57x57.png">
+    [#--  <link rel="apple-touch-icon" sizes="57x57" href="/images/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="/images/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="/images/apple-icon-72x72.png">
     <link rel="apple-touch-icon" sizes="76x76" href="/images/apple-icon-76x76.png">
@@ -61,7 +61,7 @@
     <link rel="apple-touch-icon" sizes="120x120" href="/images/apple-icon-120x120.png">
     <link rel="apple-touch-icon" sizes="144x144" href="/images/apple-icon-144x144.png">
     <link rel="apple-touch-icon" sizes="152x152" href="/images/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-icon-180x180.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-icon-180x180.png">  ---]
     [#-- Android Icons --]
     <link rel="manifest" href="/images/manifest.json">
     [#-- IE 11+ configuration --]
@@ -70,10 +70,11 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/images/ms-icon-144x144.png">
     [#-- Standard Favicon Fare --]
-    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" href="https://iveone-test.ivegroup.com.au/public/assets/favicon.ico" />
+     [#--  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="96x96" href="/images/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="128" href="/images/favicon-128.png">
+    <link rel="icon" type="image/png" sizes="128" href="/images/favicon-128.png">  --]
     [#-- End Favicon Madness --]
     <link rel="stylesheet" href="/css/font-awesome-4.7.0.min.css" />
     [#if theme.type == "simple"]
@@ -198,16 +199,19 @@
   <script src="${request.contextPath}/js/identityProvider/Redirect.js?version=${version}"></script>
   [/#if]
   [/#macro]
-  [#macro main title="Login" rowClass="row center-xs" colClass="col-xs col-sm-8 col-md-6 col-lg-5 col-xl-4"]
+  [#macro main title="" rowClass="row center-xs" colClass="col-xs col-sm-8 col-md-6 col-lg-5 col-xl-4"]
   <section class="page-body container">
     [@printErrorAlerts rowClass colClass/]
     [@printInfoAlerts rowClass colClass/]
     <div class="${rowClass}">
       <div class="${colClass}">
-        <div class="panel min-w-full text-center" data-in-progress>        
+        <div class="panel min-w-full" data-in-progress>        
+          <h2 class="text-4xl font-bold mt-4 text-center">
+         Welcome to IVE One
+         </h2>
           [#if title?has_content]
-          <h2 class="text-4xl font-bold mb-4 mt-4 text-center">
-         IVE One ${title}
+          <h2 class="text-3xl font-bold mb-4 text-center">
+          ${title}
           </h2>
           [/#if]
           <main class="form-wrapper flex flex-col space-y-4 w-full justify-center items-center">

@@ -50,7 +50,7 @@
       [#-- Custom header code goes here --]
     [/@helpers.header]
 
-    [@helpers.main title=theme.message("login")]
+    [@helpers.main title=theme.message("")]
       [#-- During a linking work flow, optionally indicate to the user which IdP is being linked. --] 
       [#if devicePendingIdPLink?? || pendingIdPLink??]
         <p class="mt-0">
@@ -87,10 +87,10 @@
             <i class="fa fa-info-circle" data-tooltip="${theme.message('{tooltip}remember-device')}"></i>[#t/]
           [/@helpers.input]
 
-          <div class="flex flex-col gap-4 mt-4">
+          <div class="flex flex-col gap-4 mt-4 justify-center items-center">
             [#if showPasswordField]
               <div >
-              [@helpers.button icon="" text=theme.message("submit")/]
+              [@helpers.button icon="" text=theme.message("Login")/]
               </div>
               <div class="mt-2">
               [@helpers.link url="${request.contextPath}/password/forgot"]${theme.message("forgot-your-password")}[/@helpers.link]
