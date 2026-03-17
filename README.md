@@ -58,6 +58,31 @@ When done, commit changes to version control.
 
 You can do a final upload of whatever is in the TMP_DIR by running `upload.sh`.
 
+## Email Template UI
+
+This repo also includes a small local web UI for editing FusionAuth email templates.
+
+1. Download templates locally:
+
+```sh
+./download-emails.sh --clean
+```
+
+2. Start the UI:
+
+```sh
+pnpm email:ui
+```
+
+3. Open http://localhost:4545
+
+In the UI you can:
+
+* Edit and save templates on disk
+* Duplicate a template (optionally apply a light "IVE One" branding pass)
+* Validate & preview by calling FusionAuth `POST /api/email/template/preview`
+* Upload the currently selected template via the FusionAuth CLI
+
 ## Usage for upgrading
 
 When [upgrading FusionAuth](https://fusionauth.io/docs/operate/deploy/upgrade), there may be changes in newer theme templates. If you have a customized theme, you will need to manually apply these changes. To find the differences, you can download the base theme from the version you are upgrading to, and compare it to the base theme of your current FusionAuth installation. Update the variables in the `.env` file accordingly for each version. You should use the [Default theme Id `75a068fd-e94b-451a-9aeb-3ddb9a3b5987`](https://fusionauth.io/docs/get-started/core-concepts/limitations#default-configuration) as the `THEME_ID` value for both versions. Update the `TMP_DIR` before each download to save the themes to different folders. You can download the current and new themes using the download script:

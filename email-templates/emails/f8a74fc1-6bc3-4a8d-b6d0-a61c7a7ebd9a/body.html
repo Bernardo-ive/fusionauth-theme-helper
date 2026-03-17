@@ -1,0 +1,83 @@
+[#setting url_escaping_charset="UTF-8"]
+[#assign url = "${tenant.issuer}/password/change/${changePasswordId}?client_id=${(application.oauthConfiguration.clientId)!''}&tenantId=${user.tenantId}" /]
+[#list state!{} as key, value][#if key != "tenantId" && key != "client_id" && value??][#assign url = url + "&" + key?url + "=" + value?url/][/#if][/#list]
+
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f4f4f7;padding:40px 0;">
+  <tr>
+    <td align="center">
+      <table width="600" cellpadding="0" cellspacing="0" border="0" style="background-color:#ffffff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+
+        <!-- HEADER -->
+        <tr>
+  <td align="center" style="background-color:#0e0566;padding:30px 40px;">
+    <table cellpadding="0" cellspacing="0" border="0" align="center">
+      <tr>
+        <td valign="middle" style="padding-right:10px;">
+          <img
+            src="https://iveone-test.ivegroup.com.au/public/assets/appicon.png"
+            alt="IVE Group"
+            width="36"
+            height="36"
+            style="display:block;border:0;"
+          />
+        </td>
+        <td valign="middle" style="font-family:Arial,Helvetica,sans-serif;font-size:22px;font-weight:bold;color:#ffffff;letter-spacing:1px;white-space:nowrap;">
+          IVE One
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+
+        <!-- BODY -->
+        <tr>
+          <td style="padding:40px;">
+            <h1 style="margin:0 0 16px;font-family:Arial,Helvetica,sans-serif;font-size:24px;color:#0e0566;">
+              Reset Your Password
+            </h1>
+            <p style="margin:0 0 16px;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:24px;color:#0e0566;">
+              Hi ${user.firstName!'there'},
+            </p>
+            <p style="margin:0 0 24px;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:24px;color:#0e0566;">
+              We received a request to reset the password for your account. Click the button below to choose a new password.
+            </p>
+
+            <!-- CTA BUTTON -->
+            <table cellpadding="0" cellspacing="0" border="0" style="margin:0 0 24px;">
+              <tr>
+                <td align="center" style="background-color:#0e0566;border-radius:6px;">
+                  <a href="${url}" target="_blank" style="display:inline-block;padding:14px 32px;font-family:Arial,Helvetica,sans-serif;font-size:16px;font-weight:bold;color:#ffffff;text-decoration:none;">
+                    Reset Password
+                  </a>
+                </td>
+              </tr>
+            </table>
+
+            <p style="margin:0 0 16px;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:22px;color:#0e0566;">
+              If the button doesn't work, copy and paste this link into your browser:
+            </p>
+            <p style="margin:0 0 24px;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:22px;word-break:break-all;">
+              <a href="${url}" style="color:#004fa4;text-decoration:underline;">${url}</a>
+            </p>
+
+            <hr style="border:none;border-top:1px solid #ded7ff;margin:24px 0;" />
+
+            <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#0e0566;opacity:0.6;">
+              If you didn't request a password reset, you can safely ignore this email. Your password will not be changed.
+            </p>
+          </td>
+        </tr>
+
+        <!-- FOOTER -->
+        <tr>
+          <td align="center" style="background-color:#0e0566;padding:24px 40px;">
+            <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#ffffff;">
+              &copy; ${.now?string('yyyy')} IVE Group. All rights reserved.
+            </p>
+          </td>
+        </tr>
+
+      </table>
+    </td>
+  </tr>
+</table>

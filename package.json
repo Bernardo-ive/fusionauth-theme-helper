@@ -4,12 +4,14 @@
     "watch:theme": "bash ./watch.sh",
     "download": "bash ./download.sh",
     "upload": "bash ./upload.sh",
-    "download:emails": "bash ./download-emails.sh"
+    "download:emails": "bash ./download-emails.sh",
+    "email:ui": "node ./email-ui/server.js"
   },
   "dependencies": {
     "@fusionauth/cli": "^1.6.0",
     "daisyui": "^5.5.14",
     "dotenv": "^16.0.3",
+    "express": "^4.21.2",
     "tailwindcss": "^3.4.19"
   }
 }

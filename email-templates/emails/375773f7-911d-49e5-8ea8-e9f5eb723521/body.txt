@@ -1,0 +1,15 @@
+[#setting url_escaping_charset="UTF-8"]
+[#assign url = "${tenant.issuer}/password/change/${changePasswordId}?client_id=${(application.oauthConfiguration.clientId)!''}&tenantId=${user.tenantId}" /]
+[#list state!{} as key, value][#if key != "tenantId" && key != "client_id" && value??][#assign url = url + "&" + key?url + "=" + value?url/][/#if][/#list]
+
+Hi ${user.firstName!'there'},
+
+Your account has been created and you need to set up a password.
+
+Click the link below to get started:
+
+${url}
+
+If you didn't expect this email, you can safely ignore it. No changes will be made to your account.
+
+© ${.now?string('yyyy')} IVE Group. All rights reserved.

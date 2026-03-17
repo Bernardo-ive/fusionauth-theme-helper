@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FusionAuth Email Templates - IVE One</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-title">Email Templates</div>
+          <div class="brand-sub">FusionAuth -> IVE One</div>
+        </div>
+
+        <div class="search">
+          <input id="q" type="search" placeholder="Search templates..." />
+          <button id="refresh" class="btn btn-ghost" title="Refresh">
+            Refresh
+          </button>
+        </div>
+
+        <div id="list" class="list" aria-label="Templates"></div>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div class="topbar-left">
+            <div id="title" class="title">Select a template</div>
+            <div id="meta" class="meta"></div>
+          </div>
+          <div class="topbar-right">
+            <label class="toggle">
+              <input id="brandMode" type="checkbox" />
+              <span>Brand on duplicate</span>
+            </label>
+            <button id="duplicate" class="btn">Duplicate</button>
+            <button id="save" class="btn btn-primary" disabled>Save</button>
+          </div>
+        </header>
+
+        <section class="grid">
+          <div class="panel">
+            <div class="panel-title">Fields</div>
+            <div class="form">
+              <label>
+                <span>Name</span>
+                <input id="name" type="text" />
+              </label>
+              <label>
+                <span>Subject</span>
+                <input id="subject" type="text" />
+              </label>
+              <div class="row">
+                <label>
+                  <span>From Name</span>
+                  <input id="fromName" type="text" />
+                </label>
+                <label>
+                  <span>From Email</span>
+                  <input id="fromEmail" type="email" />
+                </label>
+              </div>
+            </div>
+
+            <div class="tabs">
+              <button class="tab active" data-tab="html">HTML</button>
+              <button class="tab" data-tab="text">Text</button>
+            </div>
+
+            <div class="editor">
+              <textarea id="bodyHtml" class="code" data-pane="html"></textarea>
+              <textarea id="bodyText" class="code hidden" data-pane="text"></textarea>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-title">Validate & Preview</div>
+            <div class="actions">
+              <label class="inline">
+                <span>Locale</span>
+                <input id="locale" type="text" placeholder="en" />
+              </label>
+              <button id="validate" class="btn">Preview (FusionAuth)</button>
+              <button id="upload" class="btn btn-ghost">Upload</button>
+            </div>
+
+            <div class="preview">
+              <div class="preview-title">Rendered HTML</div>
+              <iframe id="iframe" title="Email preview"></iframe>
+            </div>
+
+            <div class="preview">
+              <div class="preview-title">Rendered Text</div>
+              <pre id="textPreview" class="pre"></pre>
+            </div>
+
+            <div class="preview">
+              <div class="preview-title">Errors / Output</div>
+              <pre id="output" class="pre"></pre>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
