@@ -1,0 +1,63 @@
+[#setting url_escaping_charset="UTF-8"]
+
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f4f4f7;padding:40px 0;">
+  <tr>
+    <td align="center">
+      <table width="600" cellpadding="0" cellspacing="0" border="0" style="background-color:#ffffff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+
+        <!-- HEADER -->
+        <tr>
+          <td align="center" style="background-color:#0e0566;padding:30px 40px;">
+            <table cellpadding="0" cellspacing="0" border="0" align="center">
+              <tr>
+                <td valign="middle" style="padding-right:10px;">
+                  <img
+                    src="https://iveone-test.ivegroup.com.au/public/assets/appicon.png"
+                    alt="IVE Group"
+                    width="36"
+                    height="36"
+                    style="display:block;border:0;"
+                  />
+                </td>
+                <td valign="middle" style="font-family:Arial,Helvetica,sans-serif;font-size:22px;font-weight:bold;color:#ffffff;letter-spacing:1px;white-space:nowrap;">
+                  IVE One
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- BODY -->
+
+        <tr>
+          <td style="padding:40px;">
+            <div style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:24px;color:#0e0566;">
+[#setting url_escaping_charset="UTF-8"]
+<p>This password was found in the list of vulnerable passwords, and is no longer secure.</p>
+
+<p>In order to secure your account, it is recommended to change your password at your earliest convenience.</p>
+
+<p>Follow this link to change your password.</p>
+
+<a href="${tenant.issuer}/password/forgot?client_id=${(application.oauthConfiguration.clientId)!''}&email=${user.email?url}&tenantId=${user.tenantId}">
+  ${tenant.issuer}/password/forgot?client_id=${(application.oauthConfiguration.clientId)!''}&email=${user.email?url}&tenantId=${user.tenantId}
+</a>
+
+- IVE One
+            </div>
+          </td>
+        </tr>
+
+<!-- FOOTER -->
+        <tr>
+          <td align="center" style="background-color:#0e0566;padding:24px 40px;">
+            <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#ffffff;">
+              &copy; ${.now?string('yyyy')} IVE Group. All rights reserved.
+            </p>
+          </td>
+        </tr>
+
+      </table>
+    </td>
+  </tr>
+</table>

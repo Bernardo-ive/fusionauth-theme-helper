@@ -1,0 +1,36 @@
+<settings xmlns="http://maven.apache.org/SETTINGS/1.2.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.2.0 https://maven.apache.org/xsd/settings-1.2.0.xsd">
+
+  <!--
+    Repo-local Maven settings for proxy environments.
+
+    Configure via env vars:
+      MAVEN_HTTPS_PROXY_HOST, MAVEN_HTTPS_PROXY_PORT
+      MAVEN_HTTP_PROXY_HOST,  MAVEN_HTTP_PROXY_PORT
+      MAVEN_PROXY_USER,       MAVEN_PROXY_PASS
+
+    Optional mirror:
+      MAVEN_MIRROR_URL
+  -->
+
+  <!--
+    Mirror configuration intentionally omitted.
+    If you have a corporate Maven mirror, either:
+      - set it globally in ~/.m2/settings.xml, or
+      - add a <mirrors> block here with a concrete URL.
+
+    Maven settings cannot conditionally enable a mirror based on an env var,
+    so using ${env.MAVEN_MIRROR_URL} directly can break resolution when unset.
+  -->
+
+  <!--
+    Proxy configuration intentionally omitted.
+
+    In many Zscaler deployments, HTTPS is transparently intercepted, so Maven can reach
+    Maven Central directly once the Zscaler root CA is trusted by the JDK.
+
+    If you DO need an explicit proxy host/port, configure it in ~/.m2/settings.xml.
+  -->
+
+</settings>

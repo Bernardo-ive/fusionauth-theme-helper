@@ -2,30 +2,51 @@
   --bg: #0b1220;
   --panel: #0f1b31;
   --panel-2: #0c162a;
-  --stroke: rgba(255, 255, 255, 0.10);
+  --stroke: rgba(255, 255, 255, 0.1);
   --stroke-2: rgba(255, 255, 255, 0.14);
   --text: rgba(255, 255, 255, 0.92);
-  --muted: rgba(255, 255, 255, 0.60);
+  --muted: rgba(255, 255, 255, 0.6);
   --muted-2: rgba(255, 255, 255, 0.45);
   --accent: #ff6a3d;
   --accent-2: #ffb703;
   --good: #3ddc97;
   --bad: #ff4d6d;
 
-  --font: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
-  --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font:
+    "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, Segoe UI,
+    sans-serif;
+  --mono:
+    "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    monospace;
 }
 
-* { box-sizing: border-box; }
-html, body { height: 100%; }
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+}
 body {
   margin: 0;
   font-family: var(--font);
   color: var(--text);
   background:
-    radial-gradient(1200px 800px at 20% 10%, rgba(255, 106, 61, 0.18), transparent 55%),
-    radial-gradient(900px 600px at 90% 20%, rgba(255, 183, 3, 0.12), transparent 55%),
-    radial-gradient(900px 700px at 70% 90%, rgba(61, 220, 151, 0.10), transparent 55%),
+    radial-gradient(
+      1200px 800px at 20% 10%,
+      rgba(255, 106, 61, 0.18),
+      transparent 55%
+    ),
+    radial-gradient(
+      900px 600px at 90% 20%,
+      rgba(255, 183, 3, 0.12),
+      transparent 55%
+    ),
+    radial-gradient(
+      900px 700px at 70% 90%,
+      rgba(61, 220, 151, 0.1),
+      transparent 55%
+    ),
     var(--bg);
 }
 
@@ -37,7 +58,11 @@ body {
 
 .sidebar {
   border-right: 1px solid var(--stroke);
-  background: linear-gradient(180deg, rgba(15, 27, 49, 0.9), rgba(12, 22, 42, 0.9));
+  background: linear-gradient(
+    180deg,
+    rgba(15, 27, 49, 0.9),
+    rgba(12, 22, 42, 0.9)
+  );
   padding: 18px;
   display: grid;
   grid-template-rows: auto auto 1fr;
@@ -62,7 +87,8 @@ body {
   align-items: center;
 }
 
-input, textarea {
+input,
+textarea {
   width: 100%;
   border: 1px solid var(--stroke);
   background: rgba(255, 255, 255, 0.04);
@@ -71,7 +97,8 @@ input, textarea {
   border-radius: 12px;
   outline: none;
 }
-input:focus, textarea:focus {
+input:focus,
+textarea:focus {
   border-color: rgba(255, 106, 61, 0.45);
   box-shadow: 0 0 0 4px rgba(255, 106, 61, 0.15);
 }
@@ -81,6 +108,7 @@ input:focus, textarea:focus {
   border: 1px solid var(--stroke);
   border-radius: 14px;
   background: rgba(0, 0, 0, 0.12);
+  max-height: 85vh;
 }
 
 .item {
@@ -88,11 +116,24 @@ input:focus, textarea:focus {
   border-bottom: 1px solid var(--stroke);
   cursor: pointer;
 }
-.item:last-child { border-bottom: none; }
-.item:hover { background: rgba(255, 255, 255, 0.04); }
-.item.active { background: rgba(255, 106, 61, 0.12); }
-.item-title { font-weight: 700; font-size: 13px; }
-.item-sub { color: var(--muted); font-size: 12px; margin-top: 2px; }
+.item:last-child {
+  border-bottom: none;
+}
+.item:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+.item.active {
+  background: rgba(255, 106, 61, 0.12);
+}
+.item-title {
+  font-weight: 700;
+  font-size: 13px;
+}
+.item-sub {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 2px;
+}
 
 .main {
   display: grid;
@@ -110,8 +151,15 @@ input:focus, textarea:focus {
   gap: 14px;
 }
 
-.title { font-weight: 800; font-size: 18px; }
-.meta { margin-top: 2px; color: var(--muted); font-size: 12px; }
+.title {
+  font-weight: 800;
+  font-size: 18px;
+}
+.meta {
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 12px;
+}
 
 .topbar-right {
   display: flex;
@@ -136,11 +184,20 @@ input:focus, textarea:focus {
   border-radius: 12px;
   cursor: pointer;
 }
-.btn:hover { background: rgba(255, 255, 255, 0.07); }
-.btn:disabled { opacity: 0.55; cursor: not-allowed; }
+.btn:hover {
+  background: rgba(255, 255, 255, 0.07);
+}
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
 .btn-primary {
   border-color: rgba(255, 106, 61, 0.6);
-  background: linear-gradient(180deg, rgba(255, 106, 61, 0.24), rgba(255, 106, 61, 0.14));
+  background: linear-gradient(
+    180deg,
+    rgba(255, 106, 61, 0.24),
+    rgba(255, 106, 61, 0.14)
+  );
 }
 .btn-ghost {
   border-color: var(--stroke);
@@ -176,8 +233,17 @@ input:focus, textarea:focus {
   display: grid;
   gap: 10px;
 }
-label > span { display: block; font-size: 12px; color: var(--muted); margin-bottom: 6px; }
-.row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+label > span {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
 
 .tabs {
   display: flex;
@@ -215,7 +281,9 @@ label > span { display: block; font-size: 12px; color: var(--muted); margin-bott
   border-radius: 14px;
 }
 
-.hidden { display: none; }
+.hidden {
+  display: none;
+}
 
 .actions {
   padding: 14px;
@@ -224,9 +292,17 @@ label > span { display: block; font-size: 12px; color: var(--muted); margin-bott
   align-items: center;
   border-bottom: 1px solid var(--stroke);
 }
-.inline { display: grid; gap: 6px; }
-.inline span { font-size: 12px; color: var(--muted); }
-#locale { width: 120px; }
+.inline {
+  display: grid;
+  gap: 6px;
+}
+.inline span {
+  font-size: 12px;
+  color: var(--muted);
+}
+#locale {
+  width: 120px;
+}
 
 .preview {
   padding: 14px;
@@ -234,8 +310,14 @@ label > span { display: block; font-size: 12px; color: var(--muted); margin-bott
   gap: 10px;
   border-bottom: 1px solid var(--stroke);
 }
-.preview:last-child { border-bottom: none; }
-.preview-title { font-weight: 700; font-size: 12px; color: var(--muted); }
+.preview:last-child {
+  border-bottom: none;
+}
+.preview-title {
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--muted);
+}
 
 iframe {
   width: 100%;
@@ -260,7 +342,14 @@ iframe {
 }
 
 @media (max-width: 1100px) {
-  .app { grid-template-columns: 1fr; }
-  .sidebar { grid-template-rows: auto auto 240px; }
-  .grid { grid-template-columns: 1fr; overflow: auto; }
+  .app {
+    grid-template-columns: 1fr;
+  }
+  .sidebar {
+    grid-template-rows: auto auto 240px;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+    overflow: auto;
+  }
 }

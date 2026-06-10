@@ -20,3 +20,8 @@ fi
 if [[ -z "${FUSIONAUTH_HOST:-}" && -n "${FUSIONAUTH_URL:-}" ]]; then
   export FUSIONAUTH_HOST="$FUSIONAUTH_URL"
 fi
+
+# Canonical local working directory for downloaded/edited theme files.
+if [[ -z "${TMP_DIR:-}" ]]; then
+  export TMP_DIR="tpl"
+fi

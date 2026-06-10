@@ -19,6 +19,11 @@
       <p>
         ${theme.message('password-changed')}
       </p>
+      
+        <a href="https://iveone-test.ivegroup.com.au/" >
+          ${theme.message('login')}
+        </a>
+      
     [/@helpers.main]
 
     [@helpers.footer]

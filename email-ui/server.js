@@ -2,28 +2,33 @@
 
 const path = require('path');
 const fs = require('fs/promises');
-const { spawn } = require('child_process');
 const crypto = require('crypto');
 
 const express = require('express');
-require('dotenv').config();
+const {
+  applyIveOneBranding,
+  buildIveOneWrappedHtml,
+  loadRepoEnv,
+  resolveEmailsDir,
+  runFusionAuthCli,
+  stripBrandTemplateSpecificLogic,
+} = require('../lib/fusionauth-helpers');
 
-// Support legacy variable names used by older scripts.
-if (!process.env.FUSIONAUTH_API_KEY && process.env.API_KEY) {
-  process.env.FUSIONAUTH_API_KEY = process.env.API_KEY;
-}
-if (!process.env.FUSIONAUTH_HOST && process.env.FUSIONAUTH_URL) {
-  process.env.FUSIONAUTH_HOST = process.env.FUSIONAUTH_URL;
-}
+loadRepoEnv(path.resolve(__dirname, '..'));
 
 const FUSIONAUTH_API_KEY = process.env.FUSIONAUTH_API_KEY;
 const FUSIONAUTH_HOST = (process.env.FUSIONAUTH_HOST || 'http://localhost:9011').replace(/\/$/, '');
 
-const EMAILS_DIR = process.env.EMAILS_DIR
-  ? path.resolve(process.env.EMAILS_DIR)
-  : path.resolve(process.cwd(), 'email-templates', 'emails');
+const EMAILS_DIR = resolveEmailsDir(process.cwd());
+
+// When duplicating with branding enabled, use this template's HTML as the wrapper.
+// You can override in your shell with EMAIL_BRAND_TEMPLATE_ID.
+const EMAIL_BRAND_TEMPLATE_ID =
+  process.env.EMAIL_BRAND_TEMPLATE_ID || '375773f7-911d-49e5-8ea8-e9f5eb723521';
 
 const PORT = Number(process.env.EMAIL_UI_PORT || 4545);
+
+const LOCAL_FREEMARKER_PREVIEW_URL = (process.env.EMAIL_PREVIEW_FM_URL || 'http://localhost:4561').replace(/\/$/, '');
 
 const UUID_RE =
   /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -109,14 +114,8 @@ async function saveTemplate(id, patch) {
 }
 
 function applyBranding(text, mode) {
-  if (!text || typeof text !== 'string') return text;
   if (mode !== 'iveone') return text;
-
-  return text
-    .replace(/\[FusionAuth Default\]/g, '[IVE One]')
-    .replace(/FusionAuth Admin/g, 'IVE One')
-    .replace(/http:\/\/example\.com\b/g, '${tenant.issuer}')
-    .replace(/http:\/\/localhost:9011\b/g, '${tenant.issuer}');
+  return applyIveOneBranding(text);
 }
 
 async function duplicateTemplate(id, { mode } = {}) {
@@ -128,12 +127,23 @@ async function duplicateTemplate(id, { mode } = {}) {
 
   // Optional branding pass.
   const t = await getTemplate(dstId);
+
+  let bodyHtml = applyBranding(t.bodyHtml, mode);
+  if (mode === 'iveone') {
+    const wrapperDir = await templateDir(EMAIL_BRAND_TEMPLATE_ID);
+    const wrapperRaw = await fileToString(path.join(wrapperDir, 'body.html'));
+    const wrapperHtml = stripBrandTemplateSpecificLogic(wrapperRaw);
+    // Wrap the existing content using the branded template's header/footer.
+    // If markers are missing, we fall back to the original HTML.
+    bodyHtml = buildIveOneWrappedHtml({ wrapperHtml, contentHtml: bodyHtml });
+  }
+
   await saveTemplate(dstId, {
     name: applyBranding(t.name, mode),
     subject: applyBranding(t.subject, mode),
     fromName: applyBranding(t.fromName, mode),
     fromEmail: applyBranding(t.fromEmail, mode),
-    bodyHtml: applyBranding(t.bodyHtml, mode),
+    bodyHtml,
     bodyText: applyBranding(t.bodyText, mode),
   });
 
@@ -187,22 +197,36 @@ async function fusionAuthPreviewEmailTemplate(template, locale) {
   return json;
 }
 
-function runFusionAuthCli(args) {
-  return new Promise((resolve) => {
-    const child = spawn('npx', ['fusionauth', ...args], {
-      stdio: ['ignore', 'pipe', 'pipe'],
-      env: process.env,
-    });
+async function localFreemarkerPreviewEmailTemplate(template, { context } = {}) {
+  const url = `${LOCAL_FREEMARKER_PREVIEW_URL}/api/render`;
+  const payload = {
+    html: template.bodyHtml || '',
+    text: template.bodyText || '',
+    context: context && typeof context === 'object' ? context : {},
+  };
 
-    let out = '';
-    let err = '';
-    child.stdout.on('data', (d) => (out += String(d)));
-    child.stderr.on('data', (d) => (err += String(d)));
-
-    child.on('close', (code) => {
-      resolve({ code, out, err });
-    });
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
   });
+
+  const text = await res.text();
+  let json;
+  try {
+    json = JSON.parse(text);
+  } catch {
+    json = { raw: text };
+  }
+
+  if (!res.ok) {
+    const err = new Error(`Local FreeMarker preview failed: ${res.status}`);
+    err.statusCode = res.status;
+    err.details = json;
+    throw err;
+  }
+
+  return json;
 }
 
 const app = express();
@@ -257,6 +281,26 @@ app.post('/api/templates/:id/preview', async (req, res, next) => {
   try {
     const template = await getTemplate(req.params.id);
     const locale = req.body ? req.body.locale : null;
+    const preferLocal = Boolean(req.body && req.body.preferLocal);
+
+    if (preferLocal) {
+      const rendered = await localFreemarkerPreviewEmailTemplate(template, { context: req.body && req.body.context });
+      res.json({
+        email: {
+          subject: (template.subject || '').trim(),
+          from: {
+            name: (template.fromName || '').trim(),
+            email: (template.fromEmail || '').trim(),
+          },
+          html: rendered.html || '',
+          text: rendered.text || '',
+        },
+        errors: rendered.errors || {},
+        source: 'local-freemarker',
+      });
+      return;
+    }
+
     const result = await fusionAuthPreviewEmailTemplate(template, locale);
     res.json(result);
   } catch (e) {

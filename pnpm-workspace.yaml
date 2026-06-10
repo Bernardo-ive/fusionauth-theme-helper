@@ -1,0 +1,2 @@
+allowBuilds:
+  '@fusionauth/cli': set this to true or false

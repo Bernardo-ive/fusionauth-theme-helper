@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>email-preview</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0b1220;
+        --panel: rgba(15, 27, 49, 0.72);
+        --stroke: rgba(255, 255, 255, 0.12);
+        --text: rgba(255, 255, 255, 0.92);
+        --muted: rgba(255, 255, 255, 0.6);
+        --accent: #ff6a3d;
+        --font: "IBM Plex Sans", ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif;
+        --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: var(--font);
+        color: var(--text);
+        background:
+          radial-gradient(1200px 800px at 20% 10%, rgba(255, 106, 61, 0.18), transparent 55%),
+          radial-gradient(900px 600px at 90% 20%, rgba(255, 183, 3, 0.12), transparent 55%),
+          var(--bg);
+      }
+      header {
+        padding: 16px 18px;
+        border-bottom: 1px solid var(--stroke);
+        background: rgba(9, 16, 30, 0.6);
+        backdrop-filter: blur(8px);
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      h1 { margin: 0; font-size: 16px; letter-spacing: 0.2px; }
+      .sub { color: var(--muted); font-size: 12px; }
+      .wrap { padding: 18px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+      .panel {
+        border: 1px solid var(--stroke);
+        border-radius: 16px;
+        background: var(--panel);
+        overflow: hidden;
+      }
+      .panel h2 { margin: 0; padding: 12px 14px; font-size: 12px; color: var(--muted); border-bottom: 1px solid var(--stroke); }
+      textarea, pre {
+        width: 100%;
+        border: 0;
+        outline: none;
+        background: transparent;
+        color: var(--text);
+        font-family: var(--mono);
+        font-size: 12px;
+        line-height: 1.5;
+        padding: 12px 14px;
+        min-height: 260px;
+        margin: 0;
+      }
+      .controls { padding: 12px 14px; display: flex; gap: 10px; align-items: center; border-bottom: 1px solid var(--stroke); }
+      input {
+        border: 1px solid var(--stroke);
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--text);
+        padding: 10px 12px;
+        border-radius: 12px;
+        outline: none;
+        width: 100%;
+        font-family: var(--mono);
+        font-size: 12px;
+      }
+      button {
+        border: 1px solid rgba(255, 106, 61, 0.6);
+        background: linear-gradient(180deg, rgba(255, 106, 61, 0.24), rgba(255, 106, 61, 0.14));
+        color: var(--text);
+        padding: 10px 12px;
+        border-radius: 12px;
+        cursor: pointer;
+        white-space: nowrap;
+      }
+      iframe {
+        width: 100%;
+        height: 360px;
+        border: 0;
+        background: #fff;
+      }
+      .full { grid-column: 1 / -1; }
+      @media (max-width: 980px) { .wrap { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div>
+        <h1>email-preview</h1>
+        <div class="sub">Local ${...} placeholder renderer (not full FreeMarker)</div>
+      </div>
+      <div class="sub">POST /api/render</div>
+    </header>
+
+    <div class="wrap">
+      <div class="panel">
+        <h2>Template HTML</h2>
+        <textarea id="html"><p>Hello ${user.firstName!'there'}</p></textarea>
+      </div>
+      <div class="panel">
+        <h2>Template Text</h2>
+        <textarea id="text">Hello ${user.firstName!'there'}</textarea>
+      </div>
+
+      <div class="panel full">
+        <h2>Context (JSON)</h2>
+        <div class="controls">
+          <input id="strict" type="text" value="strict=false" />
+          <button id="render">Render</button>
+        </div>
+        <textarea id="ctx">{
+  "user": {"firstName": "Pat", "tenantId": "00000000-0000-0000-0000-000000000000"},
+  "tenant": {"issuer": "https://iveone-auth-test.ivegroup.com.au"}
+}</textarea>
+      </div>
+
+      <div class="panel">
+        <h2>Rendered HTML</h2>
+        <iframe id="out"></iframe>
+      </div>
+      <div class="panel">
+        <h2>Rendered Text / Issues</h2>
+        <pre id="issues"></pre>
+      </div>
+    </div>
+
+    <script>
+      const $ = (id) => document.getElementById(id);
+      async function render() {
+        let ctx;
+        try { ctx = JSON.parse($('ctx').value); } catch (e) { alert('Invalid JSON context'); return; }
+
+        const strict = $('strict').value.includes('true');
+        const res = await fetch('/api/render', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ html: $('html').value, text: $('text').value, context: ctx, strict }),
+        });
+        const json = await res.json();
+        $('out').srcdoc = json.html || '<html><body>(empty)</body></html>';
+        $('issues').textContent = JSON.stringify({ text: json.text, unresolved: json.unresolved, warnings: json.warnings }, null, 2);
+      }
+      $('render').addEventListener('click', () => render().catch((e) => alert(e.message)));
+      render();
+    </script>
+  </body>
+</html>

@@ -5,10 +5,15 @@
     "download": "bash ./download.sh",
     "upload": "bash ./upload.sh",
     "download:emails": "bash ./download-emails.sh",
-    "email:ui": "node ./email-ui/server.js"
+    "email:ui": "node ./email-ui/server.js",
+    "email:preview": "node ./email-preview/server.js",
+    "email:preview:freemarker:build": "mvn -s ./email-preview-java/settings.xml -f ./email-preview-java/pom.xml -q package",
+    "email:preview:freemarker": "pnpm email:preview:freemarker:build && java -jar ./email-preview-java/target/email-preview-0.1.0.jar",
+    "brand:emails": "node ./duplicate-brand-emails.js",
+    "brand:emails:force": "node ./duplicate-brand-emails.js --force"
   },
   "dependencies": {
-    "@fusionauth/cli": "^1.6.0",
+    "@fusionauth/cli": "^1.8.2",
     "daisyui": "^5.5.14",
     "dotenv": "^16.0.3",
     "express": "^4.21.2",

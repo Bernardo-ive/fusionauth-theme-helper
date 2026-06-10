@@ -176,6 +176,25 @@ async function validatePreview() {
   $('output').textContent = JSON.stringify({ email: { subject: email.subject, from: email.from }, errors }, null, 2);
 }
 
+async function validatePreviewLocal() {
+  if (!state.currentId) return;
+  if (state.dirty) await save();
+
+  $('output').textContent = 'Previewing locally (FreeMarker)...';
+  const locale = $('locale').value.trim();
+  const json = await api(`/api/templates/${state.currentId}/preview`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ locale: locale || null, preferLocal: true }),
+  });
+
+  const email = json.email || {};
+  $('textPreview').textContent = email.text || '';
+  $('iframe').srcdoc = email.html || '<html><body>(No HTML returned)</body></html>';
+  const errors = json.errors || {};
+  $('output').textContent = JSON.stringify({ email: { subject: email.subject, from: email.from }, errors }, null, 2);
+}
+
 async function upload() {
   if (!state.currentId) return;
   if (state.dirty) await save();
@@ -212,6 +231,7 @@ async function boot() {
   $('save').addEventListener('click', () => save().catch(showError));
   $('duplicate').addEventListener('click', () => duplicate().catch(showError));
   $('validate').addEventListener('click', () => validatePreview().catch(showError));
+  $('validateLocal').addEventListener('click', () => validatePreviewLocal().catch(showError));
   $('upload').addEventListener('click', () => upload().catch(showError));
 
   await refresh();

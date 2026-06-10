@@ -1,0 +1,72 @@
+[#setting url_escaping_charset="UTF-8"]
+
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f4f4f7;padding:40px 0;">
+  <tr>
+    <td align="center">
+      <table width="600" cellpadding="0" cellspacing="0" border="0" style="background-color:#ffffff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+
+        <!-- HEADER -->
+        <tr>
+          <td align="center" style="background-color:#0e0566;padding:30px 40px;">
+            <table cellpadding="0" cellspacing="0" border="0" align="center">
+              <tr>
+                <td valign="middle" style="padding-right:10px;">
+                  <img
+                    src="https://iveone-test.ivegroup.com.au/public/assets/appicon.png"
+                    alt="IVE Group"
+                    width="36"
+                    height="36"
+                    style="display:block;border:0;"
+                  />
+                </td>
+                <td valign="middle" style="font-family:Arial,Helvetica,sans-serif;font-size:22px;font-weight:bold;color:#ffffff;letter-spacing:1px;white-space:nowrap;">
+                  IVE One
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- BODY -->
+
+        <tr>
+          <td style="padding:40px;">
+            <div style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:24px;color:#0e0566;">
+[#if user.verified]
+Pro tip, your email has already been verified, but feel free to complete the verification process to verify your verification of your email address.
+[/#if]
+
+[#-- When a one-time code is provided, you will want the user to enter this value interactively using a form. In this workflow the verificationId
+     is not shown to the user and instead the one-time code must be paired with the verificationId which is usually in a hidden form field. When the two
+     values are presented together, the email address can be verified --]
+[#if verificationOneTimeCode??]
+<p>To complete your email verification enter this code into the email verification form.</p>
+<p> ${verificationOneTimeCode} </p>
+[#else]
+To complete your email verification click on the following link.
+<p>
+  <a href="${tenant.issuer}/email/verify/${verificationId}?client_id=${(application.oauthConfiguration.clientId)!''}&tenantId=${user.tenantId}">
+    ${tenant.issuer}/email/verify/${verificationId}?client_id=${(application.oauthConfiguration.clientId)!''}&tenantId=${user.tenantId}
+  </a>
+</p>
+[/#if]
+
+- IVE One
+
+            </div>
+          </td>
+        </tr>
+
+<!-- FOOTER -->
+        <tr>
+          <td align="center" style="background-color:#0e0566;padding:24px 40px;">
+            <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#ffffff;">
+              &copy; ${.now?string('yyyy')} IVE Group. All rights reserved.
+            </p>
+          </td>
+        </tr>
+
+      </table>
+    </td>
+  </tr>
+</table>

@@ -1,0 +1,80 @@
+[#setting url_escaping_charset="UTF-8"]
+
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color:#f4f4f7;padding:40px 0;">
+  <tr>
+    <td align="center">
+      <table width="600" cellpadding="0" cellspacing="0" border="0" style="background-color:#ffffff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+
+        <!-- HEADER -->
+        <tr>
+          <td align="center" style="background-color:#0e0566;padding:30px 40px;">
+            <table cellpadding="0" cellspacing="0" border="0" align="center">
+              <tr>
+                <td valign="middle" style="padding-right:10px;">
+                  <img
+                    src="https://iveone-test.ivegroup.com.au/public/assets/appicon.png"
+                    alt="IVE Group"
+                    width="36"
+                    height="36"
+                    style="display:block;border:0;"
+                  />
+                </td>
+                <td valign="middle" style="font-family:Arial,Helvetica,sans-serif;font-size:22px;font-weight:bold;color:#ffffff;letter-spacing:1px;white-space:nowrap;">
+                  IVE One
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+
+        <!-- BODY -->
+
+        <tr>
+          <td style="padding:40px;">
+            <div style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:24px;color:#0e0566;">
+[#-- @ftlvariable name="event" type="io.fusionauth.domain.event.UserLoginSuspiciousEvent" --]
+[#setting url_escaping_charset="UTF-8"]
+[#if event.type == "UserLoginSuspicious"]
+  <p>A suspicious login was made on your account. If this was you, you can safely ignore this email. If this wasn't you, we recommend that you change your password as soon as possible.</p>
+[#elseif event.type == "UserLoginNewDevice"]
+  <p>A login from a new device was detected on your account. If this was you, you can safely ignore this email. If this wasn't you, we recommend that you change your password as soon as possible.</p>
+[#else]
+  <p>Suspicious activity has been observed on your account. In order to secure your account, it is recommended to change your password at your earliest convenience.</p>
+[/#if]
+
+<p>Device details</p>
+<ul>
+  <li><strong>Device name:</strong> ${(event.info.deviceName)!'&mdash;'}</li>
+  <li><strong>Device description:</strong> ${(event.info.deviceDescription)!'&mdash;'}</li>
+  <li><strong>Device type:</strong> ${(event.info.deviceType)!'&mdash;'}</li>
+  <li><strong>User agent:</strong> ${(event.info.userAgent)!'&mdash;'}</li>
+</ul>
+
+<p>Event details</p>
+<ul>
+  <li><strong>IP address:</strong> ${(event.info.ipAddress)!'&mdash;'}</li>
+  <li><strong>City:</strong> ${(event.info.location.city)!'&mdash;'}</li>
+  <li><strong>Country:</strong> ${(event.info.location.country)!'&mdash;'}</li>
+  <li><strong>Zipcode:</strong> ${(event.info.location.zipcode)!'&mdash;'}</li>
+  <li><strong>Lat/long:</strong> ${(event.info.location.latitude)!'&mdash;'}/${(event.info.location.longitude)!'&mdash;'}</li>
+</ul>
+
+- IVE One
+
+            </div>
+          </td>
+        </tr>
+
+<!-- FOOTER -->
+        <tr>
+          <td align="center" style="background-color:#0e0566;padding:24px 40px;">
+            <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#ffffff;">
+              &copy; ${.now?string('yyyy')} IVE Group. All rights reserved.
+            </p>
+          </td>
+        </tr>
+
+      </table>
+    </td>
+  </tr>
+</table>

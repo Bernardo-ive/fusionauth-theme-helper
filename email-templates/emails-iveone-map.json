@@ -1,0 +1,22 @@
+{
+  "generatedAt": "2026-03-17T03:24:10.921Z",
+  "emailsDir": "/Users/bmunz/ive/fusion-auth/fusionauth-theme-helper/email-templates/emails",
+  "wrapperId": "375773f7-911d-49e5-8ea8-e9f5eb723521",
+  "pairs": {
+    "0f2ac0bb-87f2-4656-9dbc-906989491fa2": "c730045c-cfd4-4d6d-bebc-e32b789014aa",
+    "1410d6ee-d079-4f02-ba85-a8e2385fd3aa": "82e9c717-4fb7-4da8-9cde-0d7859f4f75c",
+    "2663c4b0-529d-4dbc-b1db-2cd54abbb0b5": "22ee56e2-0c8d-4d6e-ac15-5f18b5eac878",
+    "2e469991-f94c-4b95-85a6-61ca105d4e87": "9bdad27e-aeab-4eac-a450-ea221ed60ad5",
+    "42183e90-d539-40d8-bdb8-2192b500cfec": "36dd63a4-a794-4cc4-9ec7-895dd5f0030f",
+    "494a7e00-268e-418c-93a3-e5bb5d0b1574": "24a0a3c9-9fe1-4549-b09e-084367dabf27",
+    "4c0cbd67-769d-4d02-89f4-bf9eb298d9c5": "760a00b9-b764-4c8a-991d-3eee434c80f5",
+    "4fc76e98-5978-49b5-9839-97b47ea8eb6d": "82313cf1-c6ac-4634-ba0d-12a2638e938c",
+    "572de710-6e6e-41cd-afd8-3b23b1a20ae0": "8a3b1eeb-11c3-4b2f-8d6b-e35438c5d3ed",
+    "7ef1fb66-72d7-42e9-9be4-46983a0f4d52": "aaac5c67-43a9-4c5f-b1fc-0c7922cc0013",
+    "946265d3-96a5-4179-b53d-613f46a4a90a": "63b309cb-ddb4-4a40-b420-be5f00332353",
+    "c4a7394c-2fac-4075-a000-1bf6313da310": "e07adb88-9623-401e-a199-54f33af13048",
+    "cd8dc514-33f9-4259-8d3c-4bfa6cee40dc": "f38afbab-9782-4ff4-a6ca-4001a8573968",
+    "df5430da-d8e8-4477-ae34-75ca463ac78b": "f73893f4-b384-4357-a6ac-dc4534fa8be8",
+    "fa5043f1-4cad-49b3-8e42-ced4edd60e2e": "35ab70a9-1e7b-41ed-9f5e-dd70cfece0f1"
+  }
+}

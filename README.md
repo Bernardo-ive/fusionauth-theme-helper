@@ -1,18 +1,3 @@
-# it is using tailwiddcss for styling
-all styles added to input.css will be pushed to the theme
-
-run ./watch.sh to have changes uploaded automatically
-run pnpm watch:tailwind to have tailwind process input.css into /tpl/stylesheets.css
-
-load the auth page and refresh after doing changes
-
-
-
-todo:
-- maybe automate the tailwind build process into the watch.sh script
-- add all watch script to trigger from scripts in package.json
-
-
 # Theme helper
 
 This repository has tools to help with FusionAuth theme management. It offers syncing to and from your local system. It also has a tool to compare between two themes, which is useful when upgrading FusionAuth.
@@ -32,7 +17,7 @@ More about FusionAuth themes: https://fusionauth.io/docs/customize/look-and-feel
 
 * `npm install`
 * update `.env.sample` with your API key, FusionAuth hostname, and theme id and copy it to `.env`
-* you can modify the TMP_DIR to be wherever you'd like it to be, the default is `tmp` in the current directory.
+* `TMP_DIR` defaults to `tpl`, which is the canonical local theme folder in this repo.
 
 If you want to run `fusionauth ...` commands directly (without `-k/-h`), load the env vars into your shell first:
 
@@ -50,6 +35,8 @@ Commit them to version control.
 
 In a separate terminal, run `watch.sh`. This will upload any modified templates and will overwrite anything present in the remote system whenever a local file changes. 
 
+In another terminal, run `pnpm watch:tailwind` to compile `input.css` to `tpl/stylesheet.css` as you edit styles.
+
 Edit the files using whatever local editor you want.
 
 In the browser, reload themed pages and see your changes live.
@@ -57,6 +44,20 @@ In the browser, reload themed pages and see your changes live.
 When done, commit changes to version control.
 
 You can do a final upload of whatever is in the TMP_DIR by running `upload.sh`.
+
+## Safe rehydrate workflow (recommended cleanup)
+
+If local files are stale or heavily drifted and you want fresh sources from FusionAuth:
+
+```sh
+# theme
+./download.sh
+
+# emails
+./download-emails.sh --clean
+```
+
+This refreshes local files without deleting project tooling/scripts.
 
 ## Email Template UI
 
@@ -82,6 +83,36 @@ In the UI you can:
 * Duplicate a template (optionally apply a light "IVE One" branding pass)
 * Validate & preview by calling FusionAuth `POST /api/email/template/preview`
 * Upload the currently selected template via the FusionAuth CLI
+
+## Local Email Preview
+
+If your FusionAuth API key can't call the preview endpoint, you can still render `${...}` placeholders locally:
+
+```sh
+pnpm email:preview
+```
+
+Open http://localhost:4560
+
+## Bulk Branding Email Templates
+
+To create branded duplicates of all downloaded templates on disk (so you don't overwrite the originals):
+
+```sh
+pnpm brand:emails
+```
+
+Dry run:
+
+```sh
+node ./duplicate-brand-emails.js --dry-run
+```
+
+If you need to regenerate duplicates (creates new duplicated IDs):
+
+```sh
+pnpm brand:emails:force
+```
 
 ## Usage for upgrading
 

@@ -4,3 +4,4 @@ node_modules
 tmp*
 package-lock.json
 email-templates/curl.txt
+email-preview-java/target/
