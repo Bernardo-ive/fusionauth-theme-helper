@@ -186,6 +186,22 @@ button:focus {
   box-shadow: 0 0 0 3px rgba(var(--blue-rgb), 0.3);
 }
 
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+button:focus-visible,
+a:focus-visible,
+.dismiss-button:focus-visible,
+[role='button']:focus-visible,
+.fa-info-circle:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 2px;
+}
+
+input[type='checkbox']:focus-visible {
+  outline-offset: 3px;
+}
+
 /* Typical typography */
 h1,
 h2,
@@ -388,6 +404,7 @@ body .alert .dismiss-button i {
   font-size: 0.75rem;
   margin: 0.5em 0;
 }
+
 label.error {
   color: var(--error-color);
   font-size: inherit;
