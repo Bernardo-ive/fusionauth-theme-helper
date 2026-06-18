@@ -206,9 +206,9 @@
     <div class="${rowClass}">
       <div class="${colClass}">
         <div class="panel min-w-full" data-in-progress>        
-          <h2 class="text-4xl font-bold mt-4 text-center">
+          <h1 class="text-4xl font-bold mt-4 text-center">
          Welcome to IVE One
-         </h2>
+         </h1>
           [#if title?has_content]
           <h2 class="text-3xl font-bold mb-4 text-center">
           ${title}
@@ -910,18 +910,18 @@
   [/#if]
   [/#macro]
   [#-- Input field of type. --]
-  [#macro input type name id autocapitalize="none" autocomplete="on" autocorrect="off" autofocus=false spellcheck="false" label="" placeholder="" leftAddon="" required=false tooltip="" disabled=false class="" dateTimeFormat="" value="" uncheckedValue=""]
+[#macro input type name id autocapitalize="none" autocomplete="on" autocorrect="off" autofocus=false spellcheck="false" label="" placeholder="" leftAddon="" required=false tooltip="" disabled=false class="" dateTimeFormat="" value="" uncheckedValue=""]
   <div class="form-row">
     [#if type == "checkbox"]
-    [@_input_checkbox name=name value=value uncheckedValue=uncheckedValue label=label tooltip=tooltip]
+    [@_input_checkbox name=name id=id value=value uncheckedValue=uncheckedValue label=label tooltip=tooltip]
     [#nested]
     [/@_input_checkbox]
     [#else]
     [@_input_text type=type name=name id=id autocapitalize=autocapitalize autocomplete=autocomplete autocorrect=autocorrect autofocus=autofocus spellcheck=spellcheck label=label placeholder=placeholder leftAddon=leftAddon required=required tooltip=tooltip disabled=disabled class=class dateTimeFormat=dateTimeFormat/]
     [/#if]
-    [@errors field=name/]
+    [@errors field=name id=id/]
   </div>
-  [/#macro]
+[/#macro]
   [#macro _input_text type name id autocapitalize autocomplete autocorrect autofocus spellcheck label placeholder leftAddon required tooltip disabled class dateTimeFormat ]
   [#if label?has_content]
   [#compress]
@@ -945,6 +945,7 @@
   <div class="input-addon-group">
     <span class="icon"><i class="fa fa-${leftAddon}"></i></span>
     [/#if]
+    [#local hasError = ((fieldMessages[name]![])?size > 0)/]
     [#local value=("((" + name + ")!'')")?eval/]
     [#if (placeholder?has_content) && (type == "date") && (value == "")]
     [#-- If the value is empty, we want to show the placeholder. This is a workaround for the date picker. --]
@@ -961,6 +962,9 @@
       value="${value}"
       [/#if]
       class="${the_class}"
+      [#if hasError]
+      aria-invalid="true" aria-describedby="${id}-error"
+      [/#if]
       autocapitalize="${autocapitalize}" autocomplete="${autocomplete}" autocorrect="${autocorrect}"
       spellcheck="${spellcheck}"
       [#if autofocus]
@@ -978,15 +982,19 @@
     [#if leftAddon?has_content]
   </div>
   [/#if]
-  [/#macro]
-  [#macro _input_checkbox name value uncheckedValue label tooltip]
+[/#macro]
+[#macro _input_checkbox name id value uncheckedValue label tooltip]
   <label>
     [#local actualValue = ("((" + name + ")!'')")?eval/]
+    [#local hasError = ((fieldMessages[name]![])?size > 0)/]
     [#local checked = actualValue?is_boolean?then(actualValue == value?boolean, actualValue == value)/]
     [#if uncheckedValue?has_content]
     <input type="hidden" name="__cb_${name}" value="${uncheckedValue}" />
     [/#if]
-    <input type="checkbox" name=${name} value="${value}"
+    <input id="${id}" type="checkbox" name="${name}" value="${value}"
+      [#if hasError]
+      aria-invalid="true" aria-describedby="${id}-error"
+      [/#if]
       [#if checked]
       checked=checked
       [/#if] />
@@ -1240,9 +1248,12 @@
   [@hidden name="timezone"/]
   [@hidden name="user_code"/]
   [/#macro]
-  [#macro errors field]
-  [#if fieldMessages[field]?has_content]
-  <span class="error">
+[#macro errors field id=""]
+[#if fieldMessages[field]?has_content]
+  <span class="error" role="alert" aria-live="polite"
+    [#if id?has_content]
+    id="${id}-error"
+    [/#if]>
     [#list fieldMessages[field]
     as message]
     ${message?no_esc}
@@ -1251,8 +1262,8 @@
     [/#if]
     [/#list]
   </span>
-  [/#if]
-  [/#macro]
+[/#if]
+[/#macro]
   [#macro button text icon="" color="blue" disabled=false name="" value=""]
   <button class="${color} button${disabled?then(' disabled', '')}"
     [#if disabled]
