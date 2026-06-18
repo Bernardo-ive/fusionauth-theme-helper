@@ -18,6 +18,7 @@ loadRepoEnv(path.resolve(__dirname, '..'));
 
 const FUSIONAUTH_API_KEY = process.env.FUSIONAUTH_API_KEY;
 const FUSIONAUTH_HOST = (process.env.FUSIONAUTH_HOST || 'http://localhost:9011').replace(/\/$/, '');
+const FUSIONAUTH_PREVIEW_HOST = (process.env.FUSIONAUTH_PREVIEW_HOST || FUSIONAUTH_HOST).replace(/\/$/, '');
 
 const EMAILS_DIR = resolveEmailsDir(process.cwd());
 
@@ -157,7 +158,7 @@ async function fusionAuthPreviewEmailTemplate(template, locale) {
     throw err;
   }
 
-  const url = `${FUSIONAUTH_HOST}/api/email/template/preview`;
+  const url = `${FUSIONAUTH_PREVIEW_HOST}/api/email/template/preview`;
   const payload = {
     emailTemplate: {
       name: (template.name || '').trim() || 'Preview',
@@ -239,6 +240,7 @@ app.get('/api/health', (req, res) => {
     ok: true,
     emailsDir: EMAILS_DIR,
     fusionAuthHost: FUSIONAUTH_HOST,
+    fusionAuthPreviewHost: FUSIONAUTH_PREVIEW_HOST,
     hasApiKey: Boolean(FUSIONAUTH_API_KEY),
   });
 });
