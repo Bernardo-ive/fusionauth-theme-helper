@@ -50,7 +50,7 @@
       [#-- Custom header code goes here --]
     [/@helpers.header]
 
-    [@helpers.main title=theme.message("")]
+    [@helpers.main title="Login"]
       [#-- During a linking work flow, optionally indicate to the user which IdP is being linked. --] 
       [#if devicePendingIdPLink?? || pendingIdPLink??]
         <p class="mt-0">
@@ -67,7 +67,7 @@
         [/#if]
         </p>
       [/#if]
-      <form action="${request.contextPath}/oauth2/authorize" method="POST" class="full">
+      <form action="${request.contextPath}/oauth2/authorize" method="POST" class="full" novalidate>
         [@helpers.oauthHiddenFields/]
         [@helpers.hidden name="showPasswordField"/]
         [@helpers.hidden name="userVerifyingPlatformAuthenticatorAvailable"/]
@@ -76,9 +76,10 @@
         [/#if]
 
         <fieldset>
-          [@helpers.input type="text" name="loginId" id="loginId" autocomplete="username" autocapitalize="none" autocomplete="on" autocorrect="off" spellcheck="false" autofocus=(!loginId?has_content) placeholder=theme.message("loginId") leftAddon="user" disabled=(showPasswordField && hasDomainBasedIdentityProviders)/]
+          <legend class="sr-only">Login form</legend>
+          [@helpers.input type="text" name="loginId" id="loginId" label=theme.message("loginId") autocomplete="username" autocapitalize="none" autocomplete="on" autocorrect="off" spellcheck="false" autofocus=(!loginId?has_content) placeholder=theme.message("loginId") leftAddon="user" disabled=(showPasswordField && hasDomainBasedIdentityProviders)/]
           [#if showPasswordField]
-            [@helpers.input type="password" name="password" id="password" autocomplete="current-password" autofocus=loginId?has_content placeholder=theme.message("password") leftAddon="lock"/]
+            [@helpers.input type="password" name="password" id="password" label=theme.message("password") autocomplete="current-password" autofocus=loginId?has_content placeholder=theme.message("password") leftAddon="lock"/]
             [@helpers.captchaBadge showCaptcha=showCaptcha captchaMethod=tenant.captchaConfiguration.captchaMethod siteKey=tenant.captchaConfiguration.siteKey/]
           [/#if]
         </fieldset>
