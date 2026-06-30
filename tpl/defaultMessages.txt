@@ -18,7 +18,7 @@ cancel=Cancel
 captcha-google-branding=This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy">Privacy Policy</a> and <a href="https://policies.google.com/terms">Terms of Service</a> apply.
 created=Created
 customize=Customize
-authorized-not-registered=Registration is required to access this application and your account has not been registered for this application. Please complete your registration and try again.
+authorized-not-registered=Registration is required to access this application and your account has not been registered for this application. Please complete your registration or contact support and try again.
 authorized-not-registered-title=Registration Required
 cancel-link=Cancel link request
 child-registration-not-allowed=We cannot create an account for you. Your parent or guardian can create an account for you. Enter their email address and we will ask them to create your account.
